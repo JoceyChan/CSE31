@@ -1,0 +1,22 @@
+﻿Activity 1:
+1. MARS is an interactive development environment for programing in MIPS
+      4)
+1. An assembly file is loaded by going to file and opening a folder in which you can pick the file you want to use. 
+2. You assemble the program by first saving your program and then by going to the run tab and hitting the assemble button
+3. You run the the assembled program by going to the run tab and hitting the run button 
+4. You can not run a program before assembling it, as that option is not available till the assemble button is pressed on.
+5. If you want to run the assembled program line by line you have to go back to the run tab and select the step option 
+6. You backstep to rerun the program or re do the whole process or just selecting the go option in run.
+
+
+Activity 2:
+1. .txt, .word, and .data are assembler directives .
+   1. .text is an assembly instruction follows
+   2. .data is data follows
+2. Line 10 indicates that if branch registers are equal registers 3 to 0 then finish program
+3. Line 15 puts it into a j format which is 6 bits and 26 bits. 
+4. A breakpoint in MARS is set by viewing the execute tab and then using the text segment click breakpoint check box. This will set a breakpoint. 
+5. Using f5 to run the code after the breakpoint and f7 to step
+6. First you have to reset your stimulation and then re-run your code which will stop at breakpoint and then to view it you double click in the memory locations and you can enter a different value. Then you just press the run button again and it will run after breakpoint.
+7. 0x00000000 +10 = 0x00000010 is the address that is stored in nth section. The calculation of the 13th fib number is 233 which is shown when you put a breakpoint at 13
+8. Line 19 and 21 use the syscall instruction to call extra external tool/functions--calls a syscall that will point into an integer which theen exist to set an argument and put it into argument $v0.

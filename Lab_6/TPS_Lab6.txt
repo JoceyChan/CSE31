@@ -1,0 +1,24 @@
+﻿Activity 1:
+1. The starting addresses
+   1. Text segment: 0x00400000
+   2.  Data Segment: 0x1001000
+2. The source one has more detail, sometimes it can not be translated into machine code.
+3. Between 2 address location there is a difference of 32 bits.
+4. There are 8 columns
+5. The relationship between the address difference and the number of columns are 4 bits
+6. You create a variable name from the source code by using m and then a colon and then .word and then value and then .word and value again. 
+7. The address that value m is stored in is 0x10010000
+8. Code
+9. Str 1 is stored in address 0x00400018 
+10. The display characters agree with what I learned from Lab#4 about how array characters are stored.
+11. Code
+12. 0x0000000d is the value stored
+
+
+Activity 2:
+1. If you have less operations then you have to use less software and would run faster.
+2. Code
+3. Code
+4. Code
+5. Code
+6.

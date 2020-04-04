@@ -1,0 +1,47 @@
+﻿Jocelyn Chan 
+
+
+Activity one:
+Partner’s name: Christen Pham
+
+
+
+
+Activity 2:
+1) I can open a terminal from my computer by going to the launch pad and looking for the terminal or using the command and space to get spotlight and then searching it up.
+1. You can open more than one terminal
+2. I would open two different terminals if running two different codes
+2) In order to tell what is in the current directory you could use the command line ls to list the files in my current directory
+3) In order to get in to the desktop you just do cd desktop and you will be able to navigate 
+4)We used the command line mkdir to make the directory CSE31
+
+
+
+
+Activity 3:
+1)
+http://www.cplusplus.com/reference/cstdio/scanf/
+https://www.rapidtables.com/code/linux/gcc/gcc-g.html
+
+
+2) shared links with partner 
+3) gcc -o program nameofprogram.c
+4) if there is no errors at the end and it shows you the command line again
+5) compiles source files without linking
+6) generates debug information to be used by GDB debugger.
+7) When saving your code in nano, you are given the option to change the name.
+8) nothing happens 
+9) 
+gcc -o program nameofprogram.c
+ ./program
+
+
+Pseudo code:
+Ask user to enter int
+Declare var
+Scanner
+If user enters 0 stop program
+If user enters more than 0 add all of the integers together and divide by the number of ints
+If user enters less than 0 add all of the integers together and divide by the number of ints
+Pring positive avg
+Print neg avg

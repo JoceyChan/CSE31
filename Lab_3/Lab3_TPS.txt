@@ -1,0 +1,19 @@
+1) Partner’s name: Christen Pham
+2) 
+1. 3
+2. 2 of them are pointers and they are both pointing to integers
+3. Stored in stack memory 
+4. Pointer ptr points to heap in line 12
+  
+
+3) 
+1. Structures are stored in memory by its datatype in which it’s allocated through that type. In addition, through its allocated memory-- the sum of memory in datatypes, the pointers can be allocated through structure dynamically.
+2. Head is a pointer to a structure, Head also points to a node structure 
+
+
+Assignment 1:
+
+
+1.    1. We need to pass the size of the array to the function because if we do not pass it then the function will not be able to retrieve the last index of the array. Therefore, we pass it in order to avoid out of boundary array.
+   2. The original array does change at the end of this function.
+   3. A new array is need in order to sort the function and point it to address therefore, it is needed since we would still need the original to be accessible without a complete alteration.

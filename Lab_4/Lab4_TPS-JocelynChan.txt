@@ -1,0 +1,21 @@
+﻿Partner’s name: Christen Pham
+
+
+1. I got an output of 2 which is the value of the first index of the array.
+2. The output would still be 2 since we have that whatever index of the array, it is equal to 2 therefore would not change.
+3. Answer for 2 not correct
+4. I did not expect that answer of 2 since I had received  a completely different output before index 1.
+5. 1. 1 array was allocated in this program
+2. yes they are not pointing to the same location.
+
+
+     10)  Difference in address is 4 because the size of the int
+
+
+Exercise 2 (2D arrays with malloc):
+
+
+1. Constructs a 2D array with the use of double pointers
+2. You can access the values of the array by using indices since you can get specific values. 
+3. Code
+4. We need to pass the size as an argument in order to know how big the array is going to be or will be.

@@ -1,0 +1,42 @@
+﻿Partner’s name: Christen Pham
+
+
+2) 
+1. http://web.mit.edu/gnu/doc/html/gdb_15.html
+2. https://www.tutorialspoint.com/gnu_debugger/installing_gdb.htm
+3. https://www.geeksforgeeks.org/gdb-step-by-step-introduction/
+3)
+1. We used gcc -o program nameoffile.c to compile code
+2. Load it into lldb by typing lldb name of program
+3. Run ./prorgam
+4. A breakpoint is a temporary stop in our program to test and debug. You create a breakpoint by using the command breakpoint set file punish.c --line 1
+5. I ran the program by using command r until it hit the breakpoint.
+6. You can see the value of a variable by using the ($) before the variable name.
+7. You can let the program finish running by disabling the breakpoint 
+8. You can exit LLDB by using the quit command
+
+
+Activity 3:
+1. 5 variable and 2 pointers 
+   1. Variables = x, y, *px, *py, and arr[]
+   2. *px, *py
+2. No values would be printed because nothing is being printed by the command print.
+3. By declaring them to value and also by separating them and using print statements.
+4. Inserted print statements
+5. Code
+6. Code
+7. Array names are the same as pointers since they both point at the same address
+8. It does make sense since both points to the same address
+
+
+Assignment 1:
+
+
+1. The bug in this code has to do with the scan value as it was not reading the input because it did not have an “&”. In addition, another bug was that sum needed to be a pointer as it is storing the values of input. 
+2. I fixed it by adding the “&” in front of input and then by adding the Astrid when read_values.
+Assignment 2:
+
+
+1. The output is expected since append just brings the two words together, however it did have an extra output at the end of the appended word which was unexpected.
+2. The output is not expected since it has extra variables, the bug here is that it prints out part of the previous answer
+3. This output is expected because the char length can only be up to 10 for each string.
