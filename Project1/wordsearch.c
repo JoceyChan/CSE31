@@ -8,11 +8,14 @@
 void printPuzzle(char** arr, int n);
 void searchPuzzle(char** arr, int n, char** list, int listSize);
 char** leftToRight(char** arr, int n, char** list, int listSize);
-void rightToLeft(char** arr, int n, char** list, int listSize);
+char** rightToLeft(char** arr, int n, char** list, int listSize);
 char** topToBottom(char** arr, int n, char** list, int listSize);
 char** topLeftToBottomRight(char** arr, int n, char** list, int listSize);
 char** topRightToBottomLeft(char** arr, int n, char** list, int listSize);
 typedef enum {true, false} bool;
+char *foundWords[50];
+char **ptrFoundWords = foundWords;
+int foundWordsCounter = 0;
 
 
 // Main function, DO NOT MODIFY!!!	
@@ -57,7 +60,6 @@ int main(int argc, char **argv) {
     
     // Remove newline characters from each word (except for the last word)
     for(i=0; i<49; i++){
-        printf("Size of word: %lu \n", strlen(*(words+i))-2);
         *(*(words+i) + strlen(*(words+i))-2) = '\0';
     }
     
@@ -88,6 +90,7 @@ int main(int argc, char **argv) {
 void printPuzzle(char** arr, int n){
     // This function will print out the complete puzzle grid (arr). It must produce the output in the SAME format as the samples in the instructions.
     // Your implementation here
+    
     int i, j;
     
     for (i = 0; i < n; i++){
@@ -102,42 +105,83 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
     // This function checks if arr contains words from list. If a word appears in arr, it will print out that word and then convert that word entry in arr into lower case.
     // Your implementation here
     
+    // [DONE] diagonal top left to bottom right
+    topLeftToBottomRight(arr, n, list, listSize);
+    
+    // [DONE] diagonal top right to bottom left
+    topRightToBottomLeft(arr, n, list, listSize);
+    
     //horizontal left to right
     leftToRight(arr, n, list, listSize);
     
     //horizontal right to left
-//    rightToLeft(arr, n, list, listSize);
+    rightToLeft(arr, n, list, listSize);
     
     // [DONE] vertical top to bottom
-//    topToBottom(arr, n, list, listSize);
+    topToBottom(arr, n, list, listSize);
     
-    // [DONE] diagonal top left to bottom right
-//    topLeftToBottomRight(arr, n, list, listSize);
+    // Sort found words
+    int arrSize = foundWordsCounter;
+    char *outputWords[arrSize];
+    char **ptrOutputWords = outputWords;
+    int outputWordsCounter = 0;
     
-    // [DONE] diagonal top right to bottom left
-//    topRightToBottomLeft(arr, n, list, listSize);
+    int minIndex = 0;
+    char* minWord;
+    int nextWordIndex = 1;
+    int currentWordCharIndex = 0;
+    int nextWordCharIndex = 0;
+    int k = 0;
     
+    int m = 0;
+    while (m < arrSize) {
+        k = 0;
+        nextWordIndex = 0;
+        currentWordCharIndex = 0;
+        nextWordCharIndex = 0;
+        while (k < foundWordsCounter && nextWordIndex < foundWordsCounter) {
+            char* currentWord = ptrFoundWords[k];
+            char* nextWord = ptrFoundWords[nextWordIndex];
+            if (currentWord != nextWord) {
+                if (currentWord[currentWordCharIndex] < nextWord[nextWordCharIndex] || nextWord[nextWordCharIndex] == '{') {
+                    nextWordIndex++;
+                    currentWordCharIndex = 0;
+                    nextWordCharIndex = 0;
+                    minWord = currentWord;
+                } else if (currentWord[currentWordCharIndex] > nextWord[nextWordCharIndex] || currentWord[currentWordCharIndex] == '{') {
+                    k++;
+                    currentWordCharIndex = 0;
+                    nextWordCharIndex = 0;
+                    minWord = nextWord;
+                } else if (currentWord[currentWordCharIndex] == nextWord[nextWordCharIndex]) {
+                    currentWordCharIndex++;
+                    nextWordCharIndex++;
+                }
+            } else {
+                nextWordIndex++;
+            }
+        }
+        ptrOutputWords[outputWordsCounter] = minWord;
+        outputWordsCounter++;
+        m++;
+        for (int z = 0; z < foundWordsCounter; z++) {
+            if (minWord == ptrFoundWords[z]) {
+                ptrFoundWords[z] = "{";
+            }
+        }
+    }
+    
+    for (int y = 0; y < foundWordsCounter; y++) {
+        if (y != foundWordsCounter - 1) {
+            printf("State Found: %s\n", outputWords[y]);
+        } else {
+            printf("State Found: %s\n\n", outputWords[y]);
+        }
+    }
 }
-
-//void leftToRight(char** arr, int n, char** list, int listSize){
-//    for(int i = 0; i < 50; i++){
-//        char *currentState = (*(list + i));
-//        for(int l = 0; l < strlen(currentState); l++){
-//            for(int r = 0; r < n; r++){ //r = row
-//                for(int c = 0; c < n; c++){//c = column
-//                    if(arr[r][c] == currentState[l] && r == 13){//remove r = 13 used for debug
-//                        printf("%d, %d, %d|", r, c, l);
-//                        printf("%c, %c|", currentState[l], arr[r][c]);
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
 
 char** leftToRight(char** arr, int n, char** list, int listSize){
     bool match = false;
-    bool letterMatch = false;
     
     int counter = 0;
     int i = 0;
@@ -146,45 +190,38 @@ char** leftToRight(char** arr, int n, char** list, int listSize){
     int r = 0;
     while (i < 50 && strlen((*(list + i))) != 0) {
         char *currentState = (*(list + i));
-        printf("****Current State: %s****\n", currentState);
         match = false;
         c = 0;
         l = 0;
         r = 0;
         
-        while (r < n && match == false) {
-            letterMatch = false;
-            counter = 0;
-            l = 0;
+        while (l < strlen(currentState) && r < n && match == false){
+            char letter = *(currentState + l);//changed
+            letter &= ~' ';
             c = 0;
-//            printf("%lu", strlen(currentState));
-            while (l < strlen(currentState) && r < n && match == false){
-                char letter = currentState[l];
-                letter &= ~' ';
+            while (r < n && match == false) {
+                counter = 0;
+                l = 0;
                 c = 0;
                 while(c < n && match == false){
-//                    printf("[R:%d, C:%d] \n", r, c);
-                    if(arr[r][c] == letter){
-//
-//                        printf("[C:%d, R:%d] Letter Match----\n", c, r);
-//                        printf("--State Letter: %c, Puzzle Letter: %c\n", currentState[l], arr[r][c]);
-
-                        letterMatch = true;
-
+                    if(*(*(arr + r) + c) == letter){
+                        
                         counter++;
                         l++;
-                        letter = currentState[l];
+                        letter = *(currentState + l);
                         letter &= ~' ';
-//                        printf("--Counter: %d, State Length: %lu\n\n", counter, strlen(currentState));
                     } else {
+                        l = 0;
+                        letter = *(currentState + l);
+                        letter &= ~' ';
                         counter = 0;
                     }
                     if (counter == strlen(currentState)) {
+                        ptrFoundWords[foundWordsCounter] = currentState;
+                        foundWordsCounter++;
                         for (int b = c; b > (c-counter); b--) {
-                            arr[r][b] = arr[r][b] + 32;
-                            printf("--To Lower: (r:%d, c:%d) %c\n", r, b, arr[r][b]);
+                            *(*(arr + r) + b) += 32;
                         }
-                        printf("Match found----\n");
                         match = true;
                     }
                     c++;
@@ -193,69 +230,63 @@ char** leftToRight(char** arr, int n, char** list, int listSize){
             }
         }
         i++;
-//        exit(0);
     }
     return arr;
 }
 
-void rightToLeft(char** arr, int n, char** list, int listSize){
+char** rightToLeft(char** arr, int n, char** list, int listSize){
     bool match = false;
-    bool letterMatch = false;
     
     int counter = 0;
     int i = 0;
     int l = 0;
-    int c= 0;
+    int c = n - 1;
     int r = 0;
-    while (i < 50) {
+    while (i < 50 && strlen((*(list + i))) != 0) {
         char *currentState = (*(list + i));
-        printf("****Current State: %s****\n", currentState);
         match = false;
-        c = 0;
+        c = n - 1;
         l = 0;
         r = 0;
         
-        while(c < n && match == false){
-            letterMatch = false;
-            counter = 0;
-            l = 0;
-            r = 0;
-            while (l < strlen(currentState) && r < n && match == false){
-                char letter = currentState[l];
-                letter &= ~' ';
-                r = 0;
-                while (r < n && match == false) {
-                    if(arr[r][c] == letter){
-                        
-                        printf("[C:%d, R:%d] Letter Match----\n", c, r);
-                        printf("--State Letter: %c, Puzzle Letter: %c\n", currentState[l], arr[r][c]);
-                        
-                        letterMatch = true;
-                        
+        while (l < strlen(currentState) && r < n && match == false){
+            char letter = *(currentState + l);//changed
+            letter &= ~' ';
+            c = n - 1;
+            //            printf("%lu", strlen(currentState));
+            while (r < n && match == false) {
+                counter = 0;
+                l = 0;
+                c = n - 1;
+                while(c > 0 && match == false){
+                    if(*(*(arr + r) + c) == letter){
                         counter++;
                         l++;
-                        letter = currentState[l];
+                        letter = *(currentState + l);
                         letter &= ~' ';
-                        printf("--Counter: %d, State Length: %lu\n\n", counter, strlen(currentState));
                     } else {
+                        l = 0;
+                        letter = *(currentState + l);
+                        letter &= ~' ';
                         counter = 0;
                     }
                     if (counter == strlen(currentState)) {
-                        for (int b = r; b > (r-counter); b--) {
-                            arr[b][c] = arr[b][c] + 32;
-                            printf("--To Lower: (r:%d, c:%d) %c\n", b, c, arr[b][c]);
+                        ptrFoundWords[foundWordsCounter] = currentState;
+                        foundWordsCounter++;
+                        for (int b = c; b < (c+counter); b++) {
+                            *(*(arr + r) + b) += 32;
                         }
-                        printf("Match found----\n");
                         match = true;
                     }
-                    r++;
+                    c--;
                 }
+                r++;
             }
-            c++;
         }
         i++;
+        //        exit(0);
     }
-//    return arr;
+    return arr;
 }
 
 char** topToBottom(char** arr, int n, char** list, int listSize){
@@ -269,7 +300,6 @@ char** topToBottom(char** arr, int n, char** list, int listSize){
     int r = 0;
     while (i < 50) {
         char *currentState = (*(list + i));
-        printf("****Current State: %s****\n", currentState);
         match = false;
         c = 0;
         l = 0;
@@ -281,31 +311,36 @@ char** topToBottom(char** arr, int n, char** list, int listSize){
             l = 0;
             r = 0;
             while (l < strlen(currentState) && r < n && match == false){
-                char letter = currentState[l];
+                char letter = *(currentState + l); //currentState[l]
                 letter &= ~' ';
                 r = 0;
                 while (r < n && match == false) {
-                    if(arr[r][c] == letter){
-                        
-                        printf("[C:%d, R:%d] Letter Match----\n", c, r);
-                        printf("--State Letter: %c, Puzzle Letter: %c\n", currentState[l], arr[r][c]);
-                        
+                    char tempArrLetter = *(*(arr + r) + c);
+                    if(tempArrLetter >= 'a' && tempArrLetter <= 'z') {
+                        tempArrLetter -= 32;
+                    }
+                    if(tempArrLetter == letter){
                         letterMatch = true;
                         
                         counter++;
                         l++;
-                        letter = currentState[l];
+                        letter = *(currentState + l); //currentState[l]
                         letter &= ~' ';
-                        printf("--Counter: %d, State Length: %lu\n\n", counter, strlen(currentState));
                     } else {
+                        l = 0;
+                        l = 0;
+                        letter = *(currentState + l); //currentState[l]
+                        letter &= ~' ';
                         counter = 0;
                     }
                     if (counter == strlen(currentState)) {
+                        ptrFoundWords[foundWordsCounter] = currentState;
+                        foundWordsCounter++;
                         for (int b = r; b > (r-counter); b--) {
-                            arr[b][c] = arr[b][c] + 32;
-                            printf("--To Lower: (r:%d, c:%d) %c\n", b, c, arr[b][c]);
+                            if(*(*(arr + b) + c) >= 'A' && *(*(arr + b) + c) <= 'Z') {
+                                *(*(arr + b) + c) += 32; //arr[b][c] = arr[b][c] + 32
+                            }
                         }
-                        printf("Match found----\n");
                         match = true;
                     }
                     r++;
@@ -329,7 +364,6 @@ char** topLeftToBottomRight(char** arr, int n, char** list, int listSize){
     int r = 0;
     while (i < 50) {
         char *currentState = (*(list + i));
-        printf("****Current State: %s****\n", currentState);
         match = false;
         c = 0;
         l = 0;
@@ -341,39 +375,36 @@ char** topLeftToBottomRight(char** arr, int n, char** list, int listSize){
             l = 0;
             r = 0;
             while (l < strlen(currentState) && r < n && match == false){ //check r < n
-                char letter = currentState[l];
+                char letter = *(currentState + l); //changed to pointer
                 letter &= ~' ';
                 r = 0;
                 while (r < n && match == false) {
                     int diagCol = c;
                     int diagRow = r;
                     l = 0;
-                    letter = currentState[l];
+                    letter = *(currentState + l); //changed to pointer
                     letter &= ~' ';
                     while (diagCol < n && diagRow < n) {
-                        printf("[C:%d, R:%d] S:%c, P:%c\n", diagCol, diagRow, letter, arr[diagRow][diagCol]);
-                        if(arr[diagRow][diagCol] == letter){
-                            printf("[C:%d, R:%d]\n", diagCol, diagRow);
+                        if( *(*(arr + diagRow) + diagCol) == letter){//arr[diagRow][diagCol]
                             
                             letterMatch = true;
                             
                             counter++;
                             l++;
-                            letter = currentState[l];
+                            letter = *(currentState + l);//changed
                             letter &= ~' ';
-                            printf("--Counter: %d, State Length: %lu\n\n", counter, strlen(currentState));
                         } else {
                             counter = 0;
                         }
                         
                         if (counter == strlen(currentState)) {
+                            ptrFoundWords[foundWordsCounter] = currentState;
+                            foundWordsCounter++;
                             int col = diagCol;
                             for (int b = diagRow; b > (diagRow-counter); b--) {
-                                arr[b][col] = arr[b][col] + 32;
-                                printf("--To Lower: (r:%d, c:%d) %c\n", b, col, arr[b][col]);
+                                *(*(arr + b) + col) += 32; //arr[b][col] = arr[b][col] + 32
                                 col--;
                             }
-                            printf("Match found----\n");
                             match = true;
                         }
                         diagCol++; //concerned
@@ -400,7 +431,6 @@ char** topRightToBottomLeft(char** arr, int n, char** list, int listSize){
     int r = 0;
     while (i < 50) {
         char *currentState = (*(list + i));
-        printf("****Current State: %s****\n", currentState);
         match = false;
         c = n - 1;
         l = 0;
@@ -412,39 +442,35 @@ char** topRightToBottomLeft(char** arr, int n, char** list, int listSize){
             l = 0;
             r = 0;
             while (l < strlen(currentState) && r < n && match == false){ //check r < n
-                char letter = currentState[l];
+                char letter = *(currentState + l);//currentState[l]
                 letter &= ~' ';
                 r = 0;
                 while (r < n && match == false) {
                     int diagCol = c;
                     int diagRow = r;
                     l = 0;
-                    letter = currentState[l];
+                    letter = *(currentState + l); //changed into pointer from currentState[l]
                     letter &= ~' ';
                     while (diagCol > 0 && diagRow < n) {
-                        printf("[C:%d, R:%d] S:%c, P:%c\n", diagCol, diagRow, letter, arr[diagRow][diagCol]);
-                        if(arr[diagRow][diagCol] == letter){
-                            printf("[C:%d, R:%d]\n", diagCol, diagRow);
-                            
+                        if(*(*(arr + diagRow) + diagCol) == letter){ //arr[diagRow][diagCol]
                             letterMatch = true;
                             
                             counter++;
                             l++;
-                            letter = currentState[l];
+                            letter = *(currentState + l);//changed to pointer
                             letter &= ~' ';
-                            printf("--Counter: %d, State Length: %lu\n\n", counter, strlen(currentState));
                         } else {
                             counter = 0;
                         }
                         
                         if (counter == strlen(currentState)) {
+                            ptrFoundWords[foundWordsCounter] = currentState;
+                            foundWordsCounter++;
                             int col = diagCol;
                             for (int b = diagRow; b > (diagRow-counter); b--) {
-                                arr[b][col] = arr[b][col] + 32;
-                                printf("--To Lower: (r:%d, c:%d) %c\n", b, col, arr[b][col]);
+                                *(*(arr+b)+col) += 32;// arr[b][col] = arr[b][col] + 32;
                                 col++;
                             }
-                            printf("Match found----\n");
                             match = true;
                         }
                         diagCol--; //concerned
