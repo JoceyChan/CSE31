@@ -173,9 +173,9 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
     
     for (int y = 0; y < foundWordsCounter; y++) {
         if (y != foundWordsCounter - 1) {
-            printf("State Found: %s\n", outputWords[y]);
+            printf("Word Found: %s\n", outputWords[y]);
         } else {
-            printf("State Found: %s\n\n", outputWords[y]);
+            printf("Word Found: %s\n\n", outputWords[y]);
         }
     }
 }
