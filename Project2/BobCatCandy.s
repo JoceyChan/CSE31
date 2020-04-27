@@ -35,6 +35,7 @@ main:
         syscall #prints
 
         move $t0, $v0
+		# loads and prints str2
         la $a0, str2
         li $v0, 4
         syscall
