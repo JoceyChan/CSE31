@@ -12,10 +12,10 @@ str3: .asciiz "How, how much do you have?" # It then asks user to enter how much
 .text
 
 main:
-		#This is the main program.
-		#It then calls maxBars function to perform calculation of the maximum BobCat Bars the user will receive based on the information entered.
+		# This is the main program.
+		# It then calls maxBars function to perform calculation of the maximum BobCat Bars the user will receive based on the information entered.
 
-		#It then prints out a statement about the maximum BobCat Bars the user will receive.
+		# It then prints out a statement about the maximum BobCat Bars the user will receive.
 		
 		addi $sp, $sp -4	# Feel free to change the increment if you need for space.
 		sw $ra, 0($sp)
