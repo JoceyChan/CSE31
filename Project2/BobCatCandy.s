@@ -41,9 +41,11 @@ main:
         syscall
         li $v0, 5
         syscall
-        
 
-
+		move $t1, $v0 # stores user input in temp 1
+		la $a0, str3 # loading address
+		li $v0, 4 
+		syscall
 
 		jal maxBars 	# Call maxBars to calculate the maximum number of BobCat Bars
 
