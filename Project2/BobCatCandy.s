@@ -27,8 +27,8 @@ main:
         li $v0, 4 # this is fn used for printing
         syscall
 
-        #loads and prints str1
-        la $a0, str1 #addr of str to print
+        # loads and prints str1
+        la $a0, str1 # addr of str to print
         li $v0, 4 # calls fn for printing
         syscall
         li $v0, 5 # int to print
