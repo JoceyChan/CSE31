@@ -50,6 +50,12 @@ main:
 		li $v0, 5
         syscall
 
+		move $t2, $v0 # stores user input in temp 2
+		# loads and prints str4
+		la $a0, str4
+		li $v0, 4
+		syscall 
+
 
 		jal maxBars 	# Call maxBars to calculate the maximum number of BobCat Bars
 
