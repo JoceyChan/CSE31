@@ -2,11 +2,11 @@
 str0: .asciiz "Welcome to BobCat Candy, home to the famous BobCat Bars!"
 # Declare any necessary data here
 
-str1: .asciiz "Please enter the prize of a BobCat Bar:" #It first asks user to enter the price of each BobCat Bar.
+str1: .asciiz "Please enter the prize of a BobCat Bar:" # It first asks user to enter the price of each BobCat Bar.
 
-str2: .asciiz "Enter the number of bar wrappers needed to exchange for a new bar:" #It then asks user to enter the number of bar wrappers needed to exchange for a new bar.
+str2: .asciiz "Enter the number of bar wrappers needed to exchange for a new bar:" # It then asks user to enter the number of bar wrappers needed to exchange for a new bar.
 
-str3: .asciiz "How, how much do you have?" #It then asks user to enter how much money he/she has.
+str3: .asciiz "How, how much do you have?" # It then asks user to enter how much money he/she has.
 
 
 .text
