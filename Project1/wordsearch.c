@@ -203,14 +203,10 @@ void searchPuzzle(char **arr, int n, char **list, int listSize)
 
     for (int y = 0; y < foundWordsCounter; y++)
     {
-        if (y != foundWordsCounter - 1)
+        if (*(outputWords + y) != *(outputWords + y-1)) // if current word not equal to previous so it does not print duplicate words
         {
             printf("Word Found: %s\n", *(outputWords + y));
-        }
-        else
-        {
-            printf("Word Found: %s\n\n", *(outputWords + y));
-        }
+        } 
     }
 }
 
@@ -233,7 +229,7 @@ char **leftToRight(char **arr, int n, char **list, int listSize)
 
         while (l < strlen(currentState) && r < n && match == false)
         {
-            char letter = *(currentState + l); //changed
+            char letter = *(currentState + l); 
             letter &= ~' ';
             c = 0;
             while (r < n && match == false)
@@ -243,9 +239,10 @@ char **leftToRight(char **arr, int n, char **list, int listSize)
                 c = 0;
                 while (c < n && match == false)
                 {
-                    if (*(*(arr + r) + c) == letter)
+                    char tempUpperCaseChar = *(*(arr + r) + c);
+                    tempUpperCaseChar &= ~' ';
+                    if (tempUpperCaseChar == letter)
                     {
-
                         counter++;
                         l++;
                         letter = *(currentState + l);
@@ -264,7 +261,11 @@ char **leftToRight(char **arr, int n, char **list, int listSize)
                         foundWordsCounter++;
                         for (int b = c; b > (c - counter); b--)
                         {
-                            *(*(arr + r) + b) += 32;
+                            // added check to see if not lowercase
+                            if (*(*(arr + r) + b) >= 'A' && *(*(arr + r) + b) <= 'Z')
+                            {
+                                *(*(arr + r) + b) += 32;
+                            }
                         }
                         match = true;
                     }
@@ -297,10 +298,10 @@ char **rightToLeft(char **arr, int n, char **list, int listSize)
 
         while (l < strlen(currentState) && r < n && match == false)
         {
-            char letter = *(currentState + l); //changed
+            char letter = *(currentState + l); 
             letter &= ~' ';
             c = n - 1;
-            //            printf("%lu", strlen(currentState));
+            
             while (r < n && match == false)
             {
                 counter = 0;
@@ -338,7 +339,7 @@ char **rightToLeft(char **arr, int n, char **list, int listSize)
             }
         }
         i++;
-        //        exit(0);
+     
     }
     return arr;
 }
@@ -444,8 +445,8 @@ char **topLeftToBottomRight(char **arr, int n, char **list, int listSize)
             l = 0;
             r = 0;
             while (l < strlen(currentState) && r < n && match == false)
-            {                                      //check r < n
-                char letter = *(currentState + l); //changed to pointer
+            {                                    
+                char letter = *(currentState + l); 
                 letter &= ~' ';
                 r = 0;
                 while (r < n && match == false)
@@ -453,7 +454,7 @@ char **topLeftToBottomRight(char **arr, int n, char **list, int listSize)
                     int diagCol = c;
                     int diagRow = r;
                     l = 0;
-                    letter = *(currentState + l); //changed to pointer
+                    letter = *(currentState + l); 
                     letter &= ~' ';
                     while (diagCol < n && diagRow < n)
                     {
@@ -464,7 +465,7 @@ char **topLeftToBottomRight(char **arr, int n, char **list, int listSize)
 
                             counter++;
                             l++;
-                            letter = *(currentState + l); //changed
+                            letter = *(currentState + l); 
                             letter &= ~' ';
                         }
                         else
@@ -533,7 +534,7 @@ char **topRightToBottomLeft(char **arr, int n, char **list, int listSize)
                     l = 0;
                     letter = *(currentState + l);
                     letter &= ~' ';
-                    while (diagCol > 0 && diagRow < n)
+                    while (diagCol >= 0 && diagRow < n) // I had diagCol > 0 which means it would check up to index 1 when it needs to check index 0
                     {
                         if (*(*(arr + diagRow) + diagCol) == letter)
                         {
