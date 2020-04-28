@@ -16,6 +16,10 @@ str2: .asciiz "Less than or equal to\n"
 
 	# Tps 2 part 2
 	slt $t0, $s0, $s1
+	# R-Format: opcode, rs, rt, rd, shamt and funct
+	# opcode: 000000 rs:10000 rt:10001 rd:01000 shamt:00000 funct: 101010
+	# binary: 0000 0010 0001 0001 0100 0000 0010 1010
+	# hex: 0x0211402A
 	
 	# Tps 2 part 3
 	beq $t0, $zero, LEEQ
