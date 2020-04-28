@@ -26,7 +26,7 @@ str2: .asciiz "Less than or equal to\n"
 	# I-format therefore has the follwoing: opcode, rs, rt, and immediate 
 	# opcode: 000100 rs: 01000 rt: 00000 Immediate: ----------------
 	# binary: 0001 0001 0000 0000 ---- ---- ---- ----
-	# hex:  0x
+	# hex:  0x1100
 	
 	# Tps 2 part 4
 	j GRT
