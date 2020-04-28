@@ -31,9 +31,10 @@ str2: .asciiz "Less than or equal to\n"
 	# Tps 2 part 4
 	j GRT
 	# J-format: opcode, address
-	# opcode: 000010 address: --------------------------
-	# binary: 0000 10-- ----
-	# hex: 0x0
+	# opcode: 000010 address(0x0040001C): 0000 0000 0100 0000 0000 0000 0001 1100 (last 2 are dropped)
+	# address update: 0000 0100 0000 0000 0000 0001 11
+	# binary: 0000 1000 0001 0000 0000 0000 0000 0111
+	# hex: 0x08100007
 
 GRT:	li $v0, 4 
 	la $a0, str1 
