@@ -23,13 +23,17 @@ str2: .asciiz "Less than or equal to\n"
 	
 	# Tps 2 part 3
 	beq $t0, $zero, LEEQ
-	# I-format therefore has the follwoing: opcode, rs, rt, and immediate 
+	# I-format therefore has the follwoing: opcode, rs, rt, and immediate ((addrFromLabelTable - (PC+4))/4)
 	# opcode: 000100 rs: 01000 rt: 00000 Immediate: ----------------
 	# binary: 0001 0001 0000 0000 ---- ---- ---- ----
 	# hex:  0x1100
 	
 	# Tps 2 part 4
 	j GRT
+	# J-format: opcode, address
+	# opcode: 000010 address: --------------------------
+	# binary: 0000 10-- ----
+	# hex: 0x0
 
 GRT:	li $v0, 4 
 	la $a0, str1 
