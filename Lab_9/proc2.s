@@ -6,7 +6,7 @@ str2: .asciiz "Less than or equal to\n"
 	
 	addi $s0, $zero, -15
 	# I-format therefore has the follwoing: opcode, rs, rt, and immediate 
-	# opcode: 001000 rs: 00000 rt: 10000 Immediate: 1111111111110001
+	# opcode: 001000 rs: 00000 rt: 10000 Immediate: 1111 1111 1111 0001
 	# binary: 0010 0000 0001 0000 1111 1111 1111 0001
 	# hex:  0x2010FFF1
 	
@@ -24,7 +24,7 @@ str2: .asciiz "Less than or equal to\n"
 	# Tps 2 part 3
 	beq $t0, $zero, LEEQ
 	# I-format therefore has the follwoing: opcode, rs, rt, and immediate ((addrFromLabelTable - (PC+4))/4)
-	# opcode: 000100 rs: 01000 rt: 00000 Immediate: 0000000000000110 ((0x00400014 + 4) - 0x00400030)/4 = -6
+	# opcode: 000100 rs: 01000 rt: 00000 Immediate: 0000 0000 0000 0110 ((0x00400014 + 4) - 0x00400030)/4 = -6
 	# binary: 0001 0001 0000 0000 0000 0000 0000 0110
 	# hex:  0x11000006
 	
