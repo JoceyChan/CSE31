@@ -10,7 +10,9 @@ str3: .asciiz "How, how much do you have? \n" # It then asks user to enter how m
 
 str4: .asciiz "Good! Let me run the number ... \n" 
 
-str5: .asciiz "You first buy n bars. \n" 
+str5: .asciiz "You first buy" 
+
+str51: .asciiz "bars. \n" 
 
 str6: .asciiz "Then you will get another n bars \n" 
 
