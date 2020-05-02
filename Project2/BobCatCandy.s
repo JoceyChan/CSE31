@@ -18,7 +18,11 @@ str6: .asciiz "Then you will get another "
 
 str61: .asciiz "bars \n" 
 
-str7: .asciiz "With $n, you will receive a maximum of n BobCat Bars! \n" 
+str7: .asciiz "With $"
+
+str71: .asciiz ", you will receive a maximum of "
+
+str72: .asciiz " BobCat Bars! \n" 
 
 .text
 
