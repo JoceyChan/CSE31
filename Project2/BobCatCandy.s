@@ -12,6 +12,8 @@ str4: .asciiz "Good! Let me run the number ... \n"
 
 str5: .asciiz "You first buy n bars. \n" 
 
+str6: .asciiz "Then you will get another n bars \n" 
+
 .text
 
 main:
