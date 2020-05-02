@@ -14,7 +14,9 @@ str5: .asciiz "You first buy"
 
 str51: .asciiz "bars. \n" 
 
-str6: .asciiz "Then you will get another n bars \n" 
+str6: .asciiz "Then you will get another " 
+
+str61: .asciiz "bars \n" 
 
 str7: .asciiz "With $n, you will receive a maximum of n BobCat Bars! \n" 
 
