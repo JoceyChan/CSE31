@@ -8,7 +8,8 @@ str2: .asciiz "Enter the number of bar wrappers needed to exchange for a new bar
 
 str3: .asciiz "How, how much do you have? \n" # It then asks user to enter how much money he/she has.
 
-str4: .asciiz "Good! Let me run the number ... \n" 
+str4: .asciiz "Good! Let me run the number ... \n" # It then asks user to enter how much money he/she has.
+
 .text
 
 main:
@@ -17,30 +18,30 @@ main:
 
 	# It then prints out a statement about the maximum BobCat Bars the user will receive.
 		
-		addi $sp, $sp -4	# Feel free to change the increment if you need for space.
+	addi $sp, $sp -4	# Feel free to change the increment if you need for space.
 		sw $ra, 0($sp)
 		# Implement your main here
 
-      	# loads and prints str0
-        li $t3, 0
-        la $a0, str0
-       	li $v0, 4 # this is fn used for printing
-        syscall
+      		#loads and prints str0
+        	li $t3, 0
+        	la $a0, str0
+       		li $v0, 4 # this is fn used for printing
+        	syscall
 
-        # loads and prints str1
-        la $a0, str1 # addr of str to print
-        li $v0, 4 # calls fn for printing
-        syscall
-        li $v0, 5 # int to print
-        yscall #prints
+        	# loads and prints str1
+        	la $a0, str1 # addr of str to print
+        	li $v0, 4 # calls fn for printing
+        	syscall
+        	li $v0, 5 # int to print
+        	syscall #prints
 
-        move $t0, $v0
+        	move $t0, $v0
 		# loads and prints str2
-        la $a0, str2
-        li $v0, 4
-        syscall
-        li $v0, 5
-        syscall
+        	la $a0, str2
+        	li $v0, 4
+        	syscall
+        	li $v0, 5
+        	syscall
 
 		move $t1, $v0 # stores user input in temp 1
 		# loads and prints str3
@@ -48,7 +49,7 @@ main:
 		li $v0, 4 
 		syscall
 		li $v0, 5
-        syscall
+        	syscall
 
 		move $t2, $v0 # stores user input in temp 2
 		# loads and prints str4
