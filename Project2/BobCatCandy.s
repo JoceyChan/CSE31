@@ -8,7 +8,7 @@ str2: .asciiz "Enter the number of bar wrappers needed to exchange for a new bar
 
 str3: .asciiz "How, how much do you have? \n" # It then asks user to enter how much money he/she has.
 
-str4: .asciiz "Good! Let me run the number ... \n" # It then asks user to enter how much money he/she has.
+str4: .asciiz "Good! Let me run the number ... \n" 
 
 str5: .asciiz "You first buy n bars. \n" 
 
