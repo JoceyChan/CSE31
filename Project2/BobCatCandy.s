@@ -1,5 +1,5 @@
 .data 
-str0: .asciiz "Welcome to BobCat Candy, home to the famous BobCat Bars!\n"
+str0: .asciiz "Welcome to BobCat Candy, home to the famous BobCat Bars! \n"
 # Declare any necessary data here
 
 str1: .asciiz "Please enter the prize of a BobCat Bar: \n" # It first asks user to enter the price of each BobCat Bar.
