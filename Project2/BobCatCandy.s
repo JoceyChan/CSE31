@@ -14,6 +14,8 @@ str5: .asciiz "You first buy n bars. \n"
 
 str6: .asciiz "Then you will get another n bars \n" 
 
+str7: .asciiz "With $n, you will receive a maximum of n BobCat Bars! \n" 
+
 .text
 
 main:
