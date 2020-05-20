@@ -1,0 +1,22 @@
+﻿Activity 1:
+4) 32 bits
+5) 3 types: I-format: lw, /addi, R-format: add and J-format: j and jal 
+6) I format, had 4  fields- opcode, rs rt and immediate
+6b) opcode 8 hex, and the register is rs, which is $zero and the value is 0 rt is $4=s0 and the value for it is 10 the immediate value is 19 for 25
+6c)  0010 0000 0001 0000 0000 0000 0001 1001 ||  0x20100019
+7a) 0x0230402 A|| 0000 0010 0011 0000 0100 0000 0010 1010
+7b) r format 6 fields - opcode, rs, rt, rd, shm and fn 
+7c) opcode is 0, rs is 0x11. rt is 0x10, rd is 0x08, shamt is also 0, fn is 0x2a
+7d) the function for 2a is slt, rs is $s1, rt is $s0, rd is $t0
+7e) yes slt $t0, $s1, $s0
+8a) I format
+8b) opcode is 0x5, rs is 0x8, rt is 0x0
+8c)  LESS || 0x0040001C
+8d) no because it will only hold 16 not 32
+8e)  it would be 1
+8f)  MC: 00010101000000000000000000011100 || Hex: 0x1500001C, which match 
+9a) j format 2 fields 
+9b) opposite in hex 0x2
+9c)  0x00400030
+9d) 26 bits 0000 0000 0100 0000 0000 0000 0011 0000
+9e) MC: 00001000010000000000000000110000 || Hex: 0x08400030
